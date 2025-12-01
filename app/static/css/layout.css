@@ -1,0 +1,160 @@
+/* ==========================================================================
+   LAYOUT
+   Page-specific layouts: header, table, empty states
+   ========================================================================== */
+
+/* Header */
+.header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Page Titles */
+.page-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.page-description {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Birthday Table */
+.birthday-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.birthday-table thead {
+    background: var(--surface-hover);
+}
+
+.birthday-table th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.birthday-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.15s ease;
+}
+
+.birthday-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.birthday-table tbody tr:hover {
+    background: var(--surface-hover);
+}
+
+.birthday-table td {
+    padding: 1rem;
+    color: var(--text-primary);
+}
+
+.name-cell {
+    font-weight: 500;
+    min-width: 150px;
+}
+
+.date-cell {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    white-space: nowrap;
+}
+
+.category-cell {
+    white-space: nowrap;
+}
+
+.days-cell {
+    white-space: nowrap;
+}
+
+.actions-cell {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-state-icon {
+    font-size: 3.5rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.empty-state-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-text {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* Birthday Notes */
+.birthday-notes {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    margin-top: 0;
+}
+
+.birthday-notes.show {
+    max-height: 200px;
+    margin-top: 0.75rem;
+}
+
+.notes-content {
+    padding: 0.75rem;
+    background-color: var(--surface-hover);
+    border-radius: 6px;
+    border-left: 3px solid var(--primary-color);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+}
+
+.notes-toggle {
+    font-size: 0.8125rem;
+    color: var(--primary-color);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0;
+    text-decoration: underline;
+}
+
+.notes-toggle:hover {
+    color: var(--primary-hover);
+}

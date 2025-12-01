@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Birthday{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('main.index') }}" class="back-link">
+    ← Back to birthdays
+</a>
+
+<div class="card">
+    <h1 class="page-title">Edit Birthday</h1>
+    <p class="page-description">Update the birthday details.</p>
+
+    <form method="POST" action="{{ url_for('main.edit', id=birthday.id) }}">
+        <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="e.g., John Doe"
+                value="{{ birthday.name }}" required autofocus>
+        </div>
+
+        <div class="form-group">
+            <label for="date" class="form-label">Birthday</label>
+            <input type="date" id="date" name="date" class="form-input" value="{{ birthday.date.strftime('%Y-%m-%d') }}"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" name="category" class="form-input">
+                {% for cat in categories %}
+                <option value="{{ cat }}" {% if cat==birthday.category %}selected{% endif %}>{{ cat }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="notes" class="form-label">Notes (optional)</label>
+            <textarea id="notes" name="notes" class="form-input"
+                placeholder="Add gift ideas, preferences, or other notes...">{{ birthday.notes or '' }}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <a href="{{ url_for('main.index') }}" class="btn btn-secondary">
+                Cancel
+            </a>
+            <button type="submit" class="btn btn-primary">
+                Update Birthday
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

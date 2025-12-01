@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="header">
+    <div class="header-content">
+        <div>
+            <h1>Birthdays</h1>
+            <p class="subtitle">Track and manage important birthdays</p>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-secondary">
+                Logout
+            </a>
+            <a href="{{ url_for('main.add') }}" class="btn btn-primary">
+                + Add Birthday
+            </a>
+        </div>
+    </div>
+</div>
+
+{% if birthdays %}
+<table class="birthday-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Days Until</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for birthday in birthdays %}
+        <tr>
+            <td class="name-cell">{{ birthday.name }}</td>
+            <td class="date-cell" data-label="Date">{{ birthday.date.strftime('%B %d, %Y') }}</td>
+            <td class="category-cell" data-label="Category">
+                <span class="category-badge category-{{ birthday.category.lower() }}">
+                    {{ birthday.category }}
+                </span>
+            </td>
+            <td class="days-cell" data-label="Days Until">
+                {% set days = birthday.days_until_birthday() %}
+                <span class="badge {% if days == 0 %}badge-today{% else %}badge-primary{% endif %}">
+                    {% if days == 0 %}
+                    Today
+                    {% elif days == 1 %}
+                    Tomorrow
+                    {% else %}
+                    {{ days }} days
+                    {% endif %}
+                </span>
+            </td>
+            <td class="actions-cell" data-label="Actions">
+                <a href="{{ url_for('main.edit', id=birthday.id) }}" class="btn btn-icon btn-edit"
+                    title="Edit birthday">
+                    ✏️
+                </a>
+                <form method="POST" action="{{ url_for('main.delete', id=birthday.id) }}" class="delete-form">
+                    <button type="submit" class="btn btn-icon btn-delete" title="Delete birthday">
+                        🗑️
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card">
+    <div class="empty-state">
+        <div class="empty-state-icon">🎂</div>
+        <h2 class="empty-state-title">No birthdays yet</h2>
+        <p class="empty-state-text">Get started by adding your first birthday.</p>
+        <a href="{{ url_for('main.add') }}" class="btn btn-primary">
+            + Add Birthday
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
