@@ -18,8 +18,36 @@
         </div>
 
         <div class="form-group">
-            <label for="date" class="form-label">Birthday</label>
-            <input type="date" id="date" name="date" class="form-input" required>
+            <label class="form-label">Birthday</label>
+            <div class="date-inputs">
+                <select id="month" name="month" class="form-input" required>
+                    <option value="">Month *</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <select id="day" name="day" class="form-input" required>
+                    <option value="">Day *</option>
+                    {% for d in range(1, 32) %}
+                    <option value="{{ d }}">{{ d }}</option>
+                    {% endfor %}
+                </select>
+
+                <input type="number" id="year" name="year" class="form-input" placeholder="Year (optional)" min="1900"
+                    max="2100">
+            </div>
+            <small style="color: var(--text-secondary); font-size: 0.875rem;">* Required. Year is optional if
+                unknown.</small>
         </div>
 
         <div class="form-group">

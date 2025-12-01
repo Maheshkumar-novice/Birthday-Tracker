@@ -8,6 +8,9 @@
             <p class="subtitle">Track and manage important birthdays</p>
         </div>
         <div style="display: flex; gap: 1rem; align-items: center;">
+            <a href="{{ url_for('main.export_txt') }}" class="btn btn-secondary" title="Export as plain text">
+                📄 Export
+            </a>
             <a href="{{ url_for('auth.logout') }}" class="btn btn-secondary">
                 Logout
             </a>
@@ -33,7 +36,13 @@
         {% for birthday in birthdays %}
         <tr>
             <td class="name-cell">{{ birthday.name }}</td>
-            <td class="date-cell" data-label="Date">{{ birthday.date.strftime('%B %d, %Y') }}</td>
+            <td class="date-cell" data-label="Date">
+                {% if birthday.has_year() %}
+                {{ birthday.date.strftime('%B %d, %Y') }}
+                {% else %}
+                {{ birthday.date.strftime('%B %d') }}
+                {% endif %}
+            </td>
             <td class="category-cell" data-label="Category">
                 <span class="category-badge category-{{ birthday.category.lower() }}">
                     {{ birthday.category }}

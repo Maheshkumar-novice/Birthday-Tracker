@@ -19,9 +19,29 @@
         </div>
 
         <div class="form-group">
-            <label for="date" class="form-label">Birthday</label>
-            <input type="date" id="date" name="date" class="form-input" value="{{ birthday.date.strftime('%Y-%m-%d') }}"
-                required>
+            <label class="form-label">Birthday</label>
+            <div class="date-inputs">
+                <select id="month" name="month" class="form-input" required>
+                    <option value="">Month *</option>
+                    {% for m in [(1, 'January'), (2, 'February'), (3, 'March'), (4, 'April'), (5, 'May'), (6, 'June'),
+                    (7, 'July'), (8, 'August'), (9, 'September'), (10, 'October'), (11, 'November'), (12, 'December')]
+                    %}
+                    <option value="{{ m[0] }}" {% if birthday.date.month==m[0] %}selected{% endif %}>{{ m[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <select id="day" name="day" class="form-input" required>
+                    <option value="">Day *</option>
+                    {% for d in range(1, 32) %}
+                    <option value="{{ d }}" {% if birthday.date.day==d %}selected{% endif %}>{{ d }}</option>
+                    {% endfor %}
+                </select>
+
+                <input type="number" id="year" name="year" class="form-input" placeholder="Year (optional)"
+                    value="{% if birthday.has_year() %}{{ birthday.date.year }}{% endif %}" min="1900" max="2100">
+            </div>
+            <small style="color: var(--text-secondary); font-size: 0.875rem;">* Required. Year is optional if
+                unknown.</small>
         </div>
 
         <div class="form-group">

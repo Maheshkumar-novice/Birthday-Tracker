@@ -1,0 +1,31 @@
+/* ==========================================================================
+   FORMS - Date Inputs
+   Styles for split date input fields
+   ========================================================================== */
+
+.date-inputs {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.date-inputs select,
+.date-inputs input {
+    flex: 1;
+    min-width: 120px;
+}
+
+.date-inputs input[type="number"] {
+    flex: 0.8;
+}
+
+@media (max-width: 640px) {
+    .date-inputs {
+        flex-direction: column;
+    }
+
+    .date-inputs select,
+    .date-inputs input {
+        width: 100%;
+    }
+}
